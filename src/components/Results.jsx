@@ -1,7 +1,23 @@
 import { Target, Trophy, Clock, Award, RefreshCcw } from 'lucide-react'
 import React from 'react'
+import { useDispatch,useSelector } from 'react-redux'
+import { resetQuiz } from '../store/QuizSlice'
 
 function Results() {
+
+  const dispatch = useDispatch()
+  const { score, questions, answers, timeLeft } = useSelector((state) => state.quiz)
+
+  const totalQuestions = questions.length
+  const percentage = Math.round((score/totalQuestions) * 100)
+  const timeUsed = 300 - timeLeft
+  const minuteUsed = Math.floor(timeUsed/60)
+  const secondUsed = timeUsed % 60
+
+  const handleResetQuiz = () => {
+    dispatch(resetQuiz())
+  }
+
   return (
     <div className='max-w-4xl mx-auto'>
       <div className='bg-white rounded-2xl shadow-xl p-8 text-center'>
@@ -22,7 +38,7 @@ function Results() {
               <Target className='w-8 h-8 text-blue-600'/>
             </div>
             <div className='text-2xl font-bold text-blue-800 mb-2'>
-              Score / Total Question
+              {score} / {totalQuestions}
             </div>
             <div className='text-blue-600 font-medium'>
               Question Correct
@@ -34,10 +50,10 @@ function Results() {
               <Award className='w-8 h-8 text-purple-600'/>
             </div>
             <div className='text-2xl font-bold text-purple-800 mb-2'>
-              Percentage
+              {percentage} %
             </div>
             <div className='text-purple-600 font-medium'>
-              Score Percentage
+              Percentage
             </div>
           </div>
 
@@ -46,7 +62,7 @@ function Results() {
               <Clock className='w-8 h-8 text-green-600'/>
             </div>
             <div className='text-2xl font-bold text-green-800 mb-2'>
-              Timer
+              {minuteUsed}:{secondUsed.toString().padStart(2, '0')}
             </div>
             <div className='text-green-600 font-medium'>
               Time Used
@@ -60,8 +76,38 @@ function Results() {
             Question Review
           </h3>
           {/* Displaying Dynamic Questions */}
-          <div className='grid gap-4 max-h-64 overflow-y-auto'></div>
+          <div className='grid gap-4 max-h-64 overflow-y-auto mb-10'>
+            { questions.map((question, index) => {
+              const answer = answers.find((a) => a.questionId === question.id)
+              const isCorrect = answer?.isCorrect ?? false
+
+              return (
+                <div
+                key={index}
+                className={`flex items-center justify-between p-4 rounded-lg border-2 
+                  ${isCorrect
+                    ? 'border-green-200 bg-green-50'
+                    : 'border-red-200 bg-red-50'
+                  }`}
+                >
+                  <span className='text-sm font-medium text-gray-700'>
+                    Question {index + 1}
+                  </span>
+                  <span 
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    isCorrect
+                    ? 'border-green-200 bg-green-50'
+                    : 'border-red-200 bg-red-50'
+                  }`}
+                  >
+
+                  </span>
+                </div>
+              )
+            }) }
+          </div>
           <button
+          onClick={handleResetQuiz}
           className='inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600
           text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200
           shadow-lg font-semibold text-lg cursor-pointer'

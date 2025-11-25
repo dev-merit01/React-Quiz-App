@@ -8,7 +8,7 @@ export const sampleQuestions = [
       "To create global styles",
       "To optimize component rendering"
     ],
-    correctAnswer: 1, 
+    correctAnswer: 1,
     explanation: "useEffect allows you to perform side effects such as fetching data, setting up subscriptions, or manipulating the DOM."
   },
 
@@ -21,7 +21,7 @@ export const sampleQuestions = [
       "A tool for managing global state",
       "A backend framework used with Node.js"
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: "JSX lets you write HTML-like tags directly inside JavaScript, making UI structure easier to visualize."
   },
 
@@ -34,7 +34,7 @@ export const sampleQuestions = [
       "Using Redux for global state",
       "Directly mutating state in a child component"
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: "Lifting state up means keeping shared state in the closest common ancestor so multiple children can access it."
   },
 
@@ -47,7 +47,7 @@ export const sampleQuestions = [
       "PUT",
       "DELETE"
     ],
-    correctAnswer: 4,
+    correctAnswer: 2,
     explanation: "PUT is generally used for updating or replacing existing resources on the server."
   },
 
@@ -60,7 +60,7 @@ export const sampleQuestions = [
       "Database operations",
       "Server-side rendering only"
     ],
-    correctAnswer: 5,
+    correctAnswer: 1,
     explanation: "The Virtual DOM improves performance by batching and optimizing real DOM updates."
   },
 
@@ -73,7 +73,7 @@ export const sampleQuestions = [
       "function",
       "define"
     ],
-    correctAnswer: 6,
+    correctAnswer: 1,
     explanation: "The 'let' keyword creates block-scoped variables, unlike 'var' which is function-scoped."
   },
 
@@ -86,7 +86,7 @@ export const sampleQuestions = [
       "Styling components",
       "Bundling the application"
     ],
-    correctAnswer: 7,
+    correctAnswer: 1,
     explanation: "React Router allows you to create multiple pages and handle navigation in single-page applications."
   },
 
@@ -99,7 +99,7 @@ export const sampleQuestions = [
       "componentDidMount",
       "shouldComponentUpdate"
     ],
-    correctAnswer: 8,
+    correctAnswer: 2,
     explanation: "useEffect(() => {}, []) runs only once when the component mounts, similar to componentDidMount."
   }
 ];
