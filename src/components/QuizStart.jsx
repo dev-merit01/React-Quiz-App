@@ -1,12 +1,14 @@
 import { BookOpen,Clock,Play,Trophy } from 'lucide-react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startQuiz } from '../store/QuizSlice';
 
 
 function QuizStart() {
 
   const dispatch = useDispatch()
+
+    const user = useSelector((state) => state.auth.user);
 
   const handleStartQuiz = () => {
     dispatch(startQuiz())
@@ -22,6 +24,11 @@ function QuizStart() {
           <h1 className='text-4xl font-bold text-gray-800 mb-4'>
             React Knowledge Quiz 👨‍💻
           </h1>
+                    {user && (
+                        <p className='text-lg text-gray-700 mb-4'>
+                            Good Luck, {user.username ? user.username : user.email}🤞
+                        </p>
+                    )}
           <p className='text-xl text-gray-600 mb-8 max-w-2xl mx-auto'>
             Test your Knowledge of React, JavaScript and Web Development. Answer multiple choice
             questions and see how well you know the fundamentals.
